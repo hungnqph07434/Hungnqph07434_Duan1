@@ -3,6 +3,7 @@ package com.poly.hungnqph07434_duan1;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -12,5 +13,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //jnJsdnahkjsda
         // them text
+    }
+
+    public void playNow(View view) {
     }
 }
