@@ -1,3 +1,6 @@
 <resources>
-    <string name="app_name">Hungnqph07434_Duan1</string>
+    <string name="app_name">Siêu Trí Tuệ</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
