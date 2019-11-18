@@ -31,7 +31,7 @@ private ImageView setting_super;
                 builder.create();
                 builder.show();
             }
-        }); 
+        });
         return view;
     }
 
