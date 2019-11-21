@@ -3,15 +3,237 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/custom_playconten"
     android:layout_height="match_parent"
-    tools:context=".SuperIntegeceActivity">
+    tools:context=".activity.SuperIntegeceActivity">
 
-    <FrameLayout
-        android:id="@+id/framesuper"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:background="#1E2146"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
-    </FrameLayout>
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:background="@drawable/custom_playconten"
+            android:text="Scores:"
+            android:textColor="#ffff"
+
+            android:textSize="25dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/tvdiemsuper"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_marginEnd="196dp"
+            android:layout_marginRight="196dp"
+            android:background="@drawable/custom_playconten"
+            android:text="10"
+            android:textColor="#ffff"
+            android:textSize="25dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/textView"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvTimecoutSuper"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:background="@drawable/custom_playconten"
+            android:text="01:30"
+            android:textColor="#ffff"
+            android:textSize="25dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/tvdiemfas"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:id="@+id/tvQuetionSuper"
+        android:padding="8dp"
+        android:text="Từ nào còn thiếu trong câu sau “Thằng Bờm có cái quạt mo/
+         Phú ông xin đổi…”?"
+        android:textSize="18dp"
+        android:textColor="#ffff"
+        android:background="@drawable/custom_playconten"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+        app:layout_constraintVertical_bias="0.0" />
+    <LinearLayout
+        android:id="@+id/lrlDaA"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/custom_playconten"
+        >
+
+        <TextView
+
+            android:textStyle="bold"
+            android:textColor="#FFF"
+            android:textSize="25dp"
+            android:layout_marginLeft="30dp"
+
+            android:layout_gravity="right"
+            android:text="A:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tvTlASuper"
+            android:textColor="#FFF"
+            android:layout_marginLeft="8dp"
+            android:layout_gravity="center_vertical"
+            android:text="AAAAAAAAA"
+            android:textSize="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/lrlDaB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/custom_playconten"
+        >
+
+        <TextView
+
+            android:textStyle="bold"
+            android:textColor="#FFF"
+            android:textSize="25dp"
+            android:layout_marginLeft="30dp"
+
+            android:layout_gravity="right"
+            android:text="B:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tvtlBSuper"
+            android:textColor="#FFF"
+            android:layout_marginLeft="8dp"
+            android:layout_gravity="center_vertical"
+            android:text="AAAAAAAAA"
+            android:textSize="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lrlDaC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/custom_playconten"
+        >
+
+        <TextView
+
+            android:textStyle="bold"
+            android:textColor="#FFF"
+            android:textSize="25dp"
+            android:layout_marginLeft="30dp"
+
+            android:layout_gravity="right"
+            android:text="C:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tvTlCSuper"
+            android:textColor="#FFF"
+            android:layout_marginLeft="8dp"
+            android:layout_gravity="center_vertical"
+            android:text="AAAAAAAAA"
+            android:textSize="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lrlDaD"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/custom_playconten"
+        >
+
+        <TextView
+
+            android:textStyle="bold"
+            android:textColor="#FFF"
+            android:textSize="25dp"
+            android:layout_marginLeft="30dp"
+
+            android:layout_gravity="right"
+            android:text="D:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tvTlDSuper"
+            android:textColor="#FFF"
+            android:layout_marginLeft="8dp"
+            android:layout_gravity="center_vertical"
+            android:text="AAAAAAAAA"
+            android:textSize="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/setting"
+        android:layout_margin="8dp"
+        android:layout_gravity="right"
+        android:id="@+id/setting_fast"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.954"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.976" />
+
 
 
 </LinearLayout>

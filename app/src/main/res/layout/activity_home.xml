@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:background="#303651"
     android:layout_height="match_parent"
-    tools:context=".HomeActivity">
+    tools:context=".activity.HomeActivity">
 
 
     <androidx.appcompat.widget.Toolbar
@@ -21,7 +21,7 @@
 
     <ImageView
         android:onClick="fastPlay"
-        android:id="@+id/imageView3"
+        android:id="@+id/imgFastPlay"
         android:layout_width="match_parent"
         android:layout_height="100dp"
        android:layout_margin="8dp"
@@ -51,6 +51,7 @@
         android:layout_height="100dp"
         android:src="@drawable/top10"
         android:onClick="top10"
+        android:id="@+id/imgTop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.144"
@@ -65,6 +66,7 @@
         android:layout_height="60dp"
         android:layout_margin="8dp"
         android:onClick="setting"
+        android:id="@+id/imgSetting"
         android:src="@drawable/setting"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -64,10 +64,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.381" />
 
-    <Switch
+    <androidx.appcompat.widget.SwitchCompat
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_margin="8dp"
+        android:id="@+id/swcMusic"
+        android:textOn="On"
+        android:textOff="Off"
+        app:showText="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -88,11 +92,14 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView4"
         app:layout_constraintVertical_bias="0.582" />
 
-    <Switch
-        android:id="@+id/switch1"
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/swcTime"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_margin="8dp"
+        android:textOn="On"
+        android:textOff="Off"
+        app:showText="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
