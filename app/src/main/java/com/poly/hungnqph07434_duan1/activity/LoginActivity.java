@@ -25,8 +25,8 @@ import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.poly.hungnqph07434_duan1.R;
-import com.poly.hungnqph07434_duan1.SqlOpenHelper;
-import com.poly.hungnqph07434_duan1.User;
+import com.poly.hungnqph07434_duan1.datasql.SqlOpenHelper;
+import com.poly.hungnqph07434_duan1.model.User;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.poly.hungnqph07434_duan1;
+package com.poly.hungnqph07434_duan1.model;
 
 public class CauHoi {
 

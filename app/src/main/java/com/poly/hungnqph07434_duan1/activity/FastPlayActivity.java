@@ -6,7 +6,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.LayoutInflater;
@@ -20,9 +19,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.poly.hungnqph07434_duan1.CauHoi;
+import com.poly.hungnqph07434_duan1.model.CauHoi;
 import com.poly.hungnqph07434_duan1.R;
-import com.poly.hungnqph07434_duan1.SqlOpenHelper;
+import com.poly.hungnqph07434_duan1.datasql.SqlOpenHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -104,7 +103,7 @@ private Random random;
         tvTlD = (TextView) findViewById(R.id.tvTlD);
         imgsettingFast = (ImageView) findViewById(R.id.setting_fast);
 
-
+        Scores=0;
         //Hiệu ứng
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.an_right);
         animation.setInterpolator(new LinearInterpolator());
@@ -128,7 +127,7 @@ private Random random;
 
         random= new Random();
         Scores=0;
-        position=random.nextInt(330);
+        position=random.nextInt(450);
 
         builder = new AlertDialog.Builder(FastPlayActivity.this, R.style.DialogCustomTheme);
 
@@ -197,7 +196,9 @@ public void clickDapAn(){
 }
 
 public void chuyenCau(){
-    position+=1;
+        int sobatky=1;
+        sobatky=random.nextInt(10);
+    position+=2;
     tvQuetion.setText(cauHoiList.get(position).getCauHoi());
     tvTlA.setText(cauHoiList.get(position).getDapAnA());
     tvtlB.setText(cauHoiList.get(position).getDapAnB());
@@ -340,7 +341,9 @@ public void chuyenCau(){
                     finish();
                 }
             });
+            tvDiemend.setText(Scores+"");
             builder.setView(view1);
+
             builder.create();
             builder.show();
             countDownTimer.cancel();
@@ -400,6 +403,7 @@ public void chuyenCau(){
                     finish();
                 }
             });
+            tvDiemend.setText(Scores+"");
             builder.setView(view1);
             builder.create();
             builder.show();
@@ -460,6 +464,7 @@ public void chuyenCau(){
                     finish();
                 }
             });
+            tvDiemend.setText(Scores+"");
             builder.setView(view1);
             builder.create();
             builder.show();

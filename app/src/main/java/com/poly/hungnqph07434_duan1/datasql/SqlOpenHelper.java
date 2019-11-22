@@ -1,4 +1,4 @@
-package com.poly.hungnqph07434_duan1;
+package com.poly.hungnqph07434_duan1.datasql;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -7,7 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import androidx.annotation.Nullable;
+import com.poly.hungnqph07434_duan1.model.CauHoi;
+import com.poly.hungnqph07434_duan1.model.User;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -24,7 +25,7 @@ public class SqlOpenHelper extends SQLiteOpenHelper {
 
     private static final String AV_TABLE = "av";
     private static String DB_PATH = "";
-    private static String DB_NAME = "dataduan11.db";// Database name
+    private static String DB_NAME = "databaseduan1.db";// Database name
     private SQLiteDatabase mDataBase;
     private final Context mContext;
 
@@ -36,7 +37,7 @@ public class SqlOpenHelper extends SQLiteOpenHelper {
     public SqlOpenHelper(Context context) {
 
 
-        super(context, "dataduan11.db", null, 1);
+        super(context, "databaseduan1.db", null, 1);
         if (android.os.Build.VERSION.SDK_INT >= 17) {
             DB_PATH = context.getApplicationInfo().dataDir + "/databases/";
         } else {
