@@ -8,13 +8,18 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.poly.hungnqph07434_duan1.R;
+import com.poly.hungnqph07434_duan1.datasql.SqlOpenHelper;
 
 public class MainActivity extends AppCompatActivity {
+    private SqlOpenHelper sqlOpenHelper;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        sqlOpenHelper= new SqlOpenHelper(MainActivity.this);
+        sqlOpenHelper.createDataBase();
         MediaPlayer mediaPlayer= MediaPlayer.create(MainActivity.this, R.raw.nhacnen);
 
         mediaPlayer.start();

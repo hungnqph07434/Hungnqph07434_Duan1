@@ -13,11 +13,13 @@ import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 
 import com.poly.hungnqph07434_duan1.R;
+import com.poly.hungnqph07434_duan1.datasql.SqlOpenHelper;
 
 public class HomeActivity extends AppCompatActivity {
     private ImageView imgFastPlay;
     private ImageView imgTop;
     private ImageView imgSetting;
+
 
 
 
