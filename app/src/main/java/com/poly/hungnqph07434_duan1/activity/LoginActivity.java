@@ -145,83 +145,85 @@ private Toolbar toolbar;
 
     public void login(View view) {
 
-        edtUsername.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        startActivity(new Intent(LoginActivity.this, HomeActivity.class));
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                nameinput=tilUser.getEditText().getText().toString().trim();
-                if (nameinput.isEmpty()){
-                    tilUser.setError("Không được để trống Name");
-                    edtUsername.requestFocus();
-                }
-                else if (nameinput.length()>50){
-                    tilUser.setError("Vượt quá");
-                    edtUsername.requestFocus();
-                }
-                else {
-                    tilUser.setError(null);
-
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-        edtPassword.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                passinput=tilPass.getEditText().getText().toString().trim();
-                if (passinput.isEmpty()){
-                    tilPass.setError("Không được để trống Pass");
-                    edtPassword.requestFocus();
-                }
-                else if (passinput.length()<5){
-                    tilPass.setError("Pass quá ngắn");
-                    edtPassword.requestFocus();
-                }
-                else  if (passinput.length()>50){
-                    tilPass.setError("Pass quá dài");
-                    edtPassword.requestFocus();
-                }
-                else {
-                    tilPass.setError(null);
-
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-
-
-        for(int i=0; i<userList.size(); i++){
-
-            if (!edtUsername.getText().toString().trim().equals(userList.get(i).getName())&& edtPassword.getText().toString().trim().equals(userList.get(i).getPassword())){
-                Toast.makeText(LoginActivity.this, "Sai Username ",Toast.LENGTH_SHORT).show();
-            }
-            else if (!edtPassword.getText().toString().trim().equals(userList.get(i).getPassword()) && edtUsername.getText().toString().trim().equals(userList.get(i).getName())){
-                Toast.makeText(LoginActivity.this, "Sai password ",Toast.LENGTH_SHORT).show();
-            }
-            else {
-                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-                Toast.makeText(LoginActivity.this, "Welcome!! "+ edtUsername.getText().toString()+"",Toast.LENGTH_SHORT).show();
-                finish();
-            }
-        }
+//        edtUsername.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//                nameinput=tilUser.getEditText().getText().toString().trim();
+//                if (nameinput.isEmpty()){
+//                    tilUser.setError("Không được để trống Name");
+//                    edtUsername.requestFocus();
+//                }
+//                else if (nameinput.length()>50){
+//                    tilUser.setError("Vượt quá");
+//                    edtUsername.requestFocus();
+//                }
+//                else {
+//                    tilUser.setError(null);
+//
+//                }
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable editable) {
+//
+//            }
+//        });
+//        edtPassword.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//                passinput=tilPass.getEditText().getText().toString().trim();
+//                if (passinput.isEmpty()){
+//                    tilPass.setError("Không được để trống Pass");
+//                    edtPassword.requestFocus();
+//                }
+//                else if (passinput.length()<5){
+//                    tilPass.setError("Pass quá ngắn");
+//                    edtPassword.requestFocus();
+//                }
+//                else  if (passinput.length()>50){
+//                    tilPass.setError("Pass quá dài");
+//                    edtPassword.requestFocus();
+//                }
+//                else {
+//                    tilPass.setError(null);
+//
+//                }
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable editable) {
+//
+//            }
+//        });
+//
+//
+//        for(int i=0; i<userList.size(); i++){
+//
+//            if (!edtUsername.getText().toString().trim().equals(userList.get(i).getName())&& edtPassword.getText().toString().trim().equals(userList.get(i).getPassword())){
+//                Toast.makeText(LoginActivity.this, "Sai Username ",Toast.LENGTH_SHORT).show();
+//            }
+//            else if (!edtPassword.getText().toString().trim().equals(userList.get(i).getPassword()) && edtUsername.getText().toString().trim().equals(userList.get(i).getName())){
+//                Toast.makeText(LoginActivity.this, "Sai password ",Toast.LENGTH_SHORT).show();
+//            }
+//            else {
+//                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+//                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+//                Toast.makeText(LoginActivity.this, "Welcome!! "+ edtUsername.getText().toString()+"",Toast.LENGTH_SHORT).show();
+//                finish();
+//            }
+//        }
 
     }
 
