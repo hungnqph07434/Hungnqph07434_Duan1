@@ -11,7 +11,7 @@
         android:layout_height="50dp"
         android:background="#303651"
         android:gravity="center"
-        android:text="Thu Cuộc"
+        android:text="Thua Cuộc"
         android:textColor="#ffff"
         android:textSize="25dp"
         app:layout_constraintBottom_toBottomOf="parent"

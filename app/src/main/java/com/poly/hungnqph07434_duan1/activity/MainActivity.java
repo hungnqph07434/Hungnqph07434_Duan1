@@ -24,5 +24,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void playNow(View view) {
         startActivity(new Intent(MainActivity.this, LoginActivity.class));
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 }

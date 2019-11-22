@@ -31,11 +31,11 @@ public class HomeActivity extends AppCompatActivity {
         imgTop = (ImageView) findViewById(R.id.imgTop);
         imgSetting = (ImageView) findViewById(R.id.imgSetting);
 
-        Animation animation1 = AnimationUtils.loadAnimation(this, R.anim.an_left);
+        Animation animation1 = AnimationUtils.loadAnimation(this, R.anim.an_lefthome);
         animation1.setInterpolator(new LinearInterpolator());
         imgFastPlay.startAnimation(animation1);
 
-        Animation animation2 = AnimationUtils.loadAnimation(this, R.anim.an_right);
+        Animation animation2 = AnimationUtils.loadAnimation(this, R.anim.an_righthome);
         animation1.setInterpolator(new LinearInterpolator());
         imgSetting.startAnimation(animation2);
 

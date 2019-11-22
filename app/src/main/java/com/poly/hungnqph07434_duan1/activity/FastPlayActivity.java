@@ -174,6 +174,7 @@ if (lrlDaA.isSelected()){
                 //hết giờ chơi
 
                 View view1 = LayoutInflater.from(FastPlayActivity.this).inflate(R.layout.dialog_hetgio, null);
+                tvDiemend.setText(Scores+"");
                 builder.setView(view1);
                 builder.create();
                 builder.show();
