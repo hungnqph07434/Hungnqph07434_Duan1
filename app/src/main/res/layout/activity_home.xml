@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
        android:layout_margin="8dp"
-        android:src="@drawable/fastplay"
+        android:src="@drawable/quizplay"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -45,6 +45,19 @@
 <!--        app:layout_constraintStart_toStartOf="parent"-->
 <!--        app:layout_constraintTop_toBottomOf="@+id/imageView3"-->
 <!--        app:layout_constraintVertical_bias="0.297" />-->
+
+    <ImageView
+        android:id="@+id/imgFastPlay2"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_margin="8dp"
+        android:onClick="superPlay"
+        android:src="@drawable/supperquiz"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgFastPlay"
+        app:layout_constraintVertical_bias="0.313" />
 
     <ImageView
         android:layout_width="150dp"

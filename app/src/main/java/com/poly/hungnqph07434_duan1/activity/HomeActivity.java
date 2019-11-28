@@ -69,4 +69,9 @@ builder.show();
     public void top10(View view) {
         startActivity(new Intent(HomeActivity.this, TopActivity.class));
     }
+
+    public void superPlay(View view) {
+        startActivity(new Intent(HomeActivity.this,SuperIntegeceActivity.class));
+
+    }
 }
