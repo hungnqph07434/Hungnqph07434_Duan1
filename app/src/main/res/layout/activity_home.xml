@@ -47,7 +47,7 @@
 <!--        app:layout_constraintVertical_bias="0.297" />-->
 
     <ImageView
-        android:id="@+id/imgFastPlay2"
+        android:id="@+id/imgsuperplay"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_margin="8dp"

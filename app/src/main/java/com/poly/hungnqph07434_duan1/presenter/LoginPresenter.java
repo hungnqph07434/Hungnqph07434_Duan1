@@ -1,6 +1,7 @@
-package com.poly.hungnqph07434_duan1;
+package com.poly.hungnqph07434_duan1.presenter;
 
 import com.poly.hungnqph07434_duan1.model.User;
+import com.poly.hungnqph07434_duan1.modelview.LoginView;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.poly.hungnqph07434_duan1;
+package com.poly.hungnqph07434_duan1.modelview;
 
 public interface QuizView {
 void time();

@@ -13,12 +13,11 @@ import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 
 import com.poly.hungnqph07434_duan1.R;
-import com.poly.hungnqph07434_duan1.datasql.SqlOpenHelper;
 
 public class HomeActivity extends AppCompatActivity {
     private ImageView imgFastPlay;
     private ImageView imgTop;
-    private ImageView imgSetting;
+    private ImageView imgSetting, imgsuperplay;
 
 
 
@@ -32,16 +31,18 @@ public class HomeActivity extends AppCompatActivity {
         imgFastPlay = (ImageView) findViewById(R.id.imgFastPlay);
         imgTop = (ImageView) findViewById(R.id.imgTop);
         imgSetting = (ImageView) findViewById(R.id.imgSetting);
+        imgsuperplay=findViewById(R.id.imgsuperplay);
 
         Animation animation1 = AnimationUtils.loadAnimation(this, R.anim.an_lefthome);
         animation1.setInterpolator(new LinearInterpolator());
         imgFastPlay.startAnimation(animation1);
+        imgTop.startAnimation(animation1);
 
         Animation animation2 = AnimationUtils.loadAnimation(this, R.anim.an_righthome);
         animation1.setInterpolator(new LinearInterpolator());
         imgSetting.startAnimation(animation2);
 
-        imgTop.startAnimation(animation1);
+        imgsuperplay.startAnimation(animation1);
 
 
 
@@ -71,7 +72,7 @@ builder.show();
     }
 
     public void superPlay(View view) {
-        startActivity(new Intent(HomeActivity.this,SuperIntegeceActivity.class));
+        startActivity(new Intent(HomeActivity.this, SuperPlayActivity.class));
 
     }
 }
