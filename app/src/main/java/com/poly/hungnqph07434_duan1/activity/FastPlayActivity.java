@@ -6,6 +6,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.LayoutInflater;
@@ -14,20 +15,25 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.poly.hungnqph07434_duan1.model.CauHoi;
 import com.poly.hungnqph07434_duan1.R;
 import com.poly.hungnqph07434_duan1.datasql.SqlOpenHelper;
+import com.poly.hungnqph07434_duan1.model.NguoiChoi;
+import com.poly.hungnqph07434_duan1.modelview.QuizView;
+import com.poly.hungnqph07434_duan1.presenter.QuizPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class FastPlayActivity extends AppCompatActivity {
+public class FastPlayActivity extends AppCompatActivity implements QuizView {
 private FrameLayout frameLayout;
 private FragmentManager fragmentManager;
     private ConstraintLayout constraintLayout;
@@ -53,15 +59,16 @@ private FragmentManager fragmentManager;
 
 
     private TextView tvDiemend;
-    private Button btnChoiLai;
+    private Button btnChoiLai, btnLuuNguoiChoi;
     private Button btnCancleHome;
+    private EditText edtNguoiChoi;
 
     private TextView tvDiemthang;
     private Button btnChoiTiep;
     private Button btnCancleHomeVictory;
 
 
-
+    private AlertDialog alertDialog;
 
 
     private LinearLayout lrlDaD;
@@ -69,10 +76,13 @@ private FragmentManager fragmentManager;
     private ImageView imgsettingFast;
     private SqlOpenHelper sqlOpenHelper;
     private List<CauHoi> cauHoiList;
+    private List<NguoiChoi> nguoiChois;
 
     private int position;
 
 private Random random;
+
+    private QuizPresenter quizPresenter;
 
 
 
@@ -81,6 +91,7 @@ private Random random;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fast_play);
+
 
         //Ánh xạ các thành phần
         constraintLayout = (ConstraintLayout) findViewById(R.id.time);
@@ -102,7 +113,9 @@ private Random random;
         tvDaD = (TextView) findViewById(R.id.tvDaD);
         tvTlD = (TextView) findViewById(R.id.tvTlD);
         imgsettingFast = (ImageView) findViewById(R.id.setting_fast);
+//Gắn điểm bằng 0;
 
+        nguoiChois= new ArrayList<>();
         Scores=0;
         //Hiệu ứng
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.an_right);
@@ -119,12 +132,13 @@ private Random random;
         lrlDaD.startAnimation(animation1);
         imgsettingFast.startAnimation(animation1);
 
+        //Khởi tạo dữ liệu
         sqlOpenHelper  = new SqlOpenHelper(FastPlayActivity.this);
         cauHoiList= new ArrayList<>();
         sqlOpenHelper.createDataBase();
 
         cauHoiList= sqlOpenHelper.getAllCauHoi();
-
+//Khởi tạo vị trí lấy câu hỏi.
         random= new Random();
         Scores=0;
         position=random.nextInt(450);
@@ -133,24 +147,23 @@ private Random random;
 
 
 
-
+//Gắn câu hỏi và câu trả lời lên.
 tvQuetion.setText(cauHoiList.get(position).getCauHoi());
 tvTlA.setText(cauHoiList.get(position).getDapAnA());
 tvtlB.setText(cauHoiList.get(position).getDapAnB());
 tvTlC.setText(cauHoiList.get(position).getDapAnC());
 tvTlD.setText(cauHoiList.get(position).getDapAnD());
 
+        quizPresenter= new QuizPresenter(this);
 
-if (lrlDaA.isSelected()){
-
-}
 
 
 
 
 
         //TimeStart
-        clock();
+        chuyencau();
+        time();
 
 
 
@@ -174,10 +187,31 @@ if (lrlDaA.isSelected()){
                 //hết giờ chơi
 
                 View view1 = LayoutInflater.from(FastPlayActivity.this).inflate(R.layout.dialog_hetgio, null);
+
+                tvDiemend =  view1.findViewById(R.id.tvDiemend);
+                btnChoiLai = view1.findViewById(R.id.btnChoiLai);
+                btnCancleHome =  view1.findViewById(R.id.btnCancleHome);
+                btnChoiLai.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        finish();
+                        overridePendingTransition(0, 0);
+                        startActivity(getIntent());
+                        overridePendingTransition(0, 0);
+                    }
+                });
+                btnCancleHome.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(FastPlayActivity.this,HomeActivity.class));
+                        finish();
+                    }
+                });
                 tvDiemend.setText(Scores+"");
+               // tvDiemend.setText(Scores+"");
                 builder.setView(view1);
                 builder.create();
-                builder.show();
+                alertDialog=builder.show();
 //                Button btnNoDialog;
 //                Button btnYesDialog;
 
@@ -218,6 +252,7 @@ public void chuyenCau(){
         AlertDialog.Builder builder= new AlertDialog.Builder(FastPlayActivity.this);
         View dialog= LayoutInflater.from(FastPlayActivity.this).inflate(R.layout.dialog_setting, null, false);
 
+
         builder.setView(dialog);
         builder.create();
         builder.show();
@@ -226,198 +261,48 @@ public void chuyenCau(){
 
     public void timCauTraLoi(){
 
+
+
     }
+
 //Click các đáp án, tính điểm.
     public void clickA(View view) {
-        if (tvDaA.getText().toString().trim().equals(cauHoiList.get(position).getDapAnDung())){
-            Scores+=1;
-            tvdiemfas.setText(Scores+"");
-            if (Scores==10){
-                View view1 = LayoutInflater.from(FastPlayActivity.this).inflate(R.layout.dialog_victory, null);
-                tvDiemthang = (TextView) view1.findViewById(R.id.tvDiemthang);
-                btnChoiTiep = (Button) view1.findViewById(R.id.btnChoiTiep);
-                btnCancleHomeVictory = (Button) view1.findViewById(R.id.btnCancleHomeVictory);
-                tvDiemthang.setText(Scores+"");
-                btnChoiTiep.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        finish();
-                        overridePendingTransition(0, 0);
-                        startActivity(getIntent());
-                        overridePendingTransition(0, 0);
-                    }
-                });
-                btnCancleHomeVictory.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        startActivity(new Intent(FastPlayActivity.this,HomeActivity.class));
-                        finish();
-                    }
-                });
-                builder.setView(view1);
-                builder.create();
-                builder.show();
-                countDownTimer.cancel();
-            }
-            chuyenCau();
-        }else{
-            View view1 = LayoutInflater.from(FastPlayActivity.this).inflate(R.layout.dialog_hetgio, null);
-            tvDiemend =  view1.findViewById(R.id.tvDiemend);
-            btnChoiLai = view1.findViewById(R.id.btnChoiLai);
-            btnCancleHome =  view1.findViewById(R.id.btnCancleHome);
-            btnChoiLai.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    finish();
-                    overridePendingTransition(0, 0);
-                    startActivity(getIntent());
-                    overridePendingTransition(0, 0);
-                }
-            });
-            btnCancleHome.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(new Intent(FastPlayActivity.this,HomeActivity.class));
-                    finish();
-                }
-            });
-            tvDiemend.setText(Scores+"");
-            builder.setView(view1);
-            builder.create();
-            builder.show();
-            countDownTimer.cancel();
-        }
+        quizPresenter.clickDapAn(tvDaA.getText().toString().trim(),cauHoiList.get(position).getDapAnDung());
     }
 
     public void clickB(View view) {
-        if (tvDaB.getText().toString().trim().equals(cauHoiList.get(position).getDapAnDung())){
-            Scores+=1;
-            tvdiemfas.setText(Scores+"");
-            if (Scores==10){
-                View view1 = LayoutInflater.from(FastPlayActivity.this).inflate(R.layout.dialog_victory, null);
-                tvDiemthang = (TextView) view1.findViewById(R.id.tvDiemthang);
-                btnChoiTiep = (Button) view1.findViewById(R.id.btnChoiTiep);
-                btnCancleHomeVictory = (Button) view1.findViewById(R.id.btnCancleHomeVictory);
-                tvDiemthang.setText(Scores+"");
-                btnChoiTiep.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        finish();
-                        overridePendingTransition(0, 0);
-                        startActivity(getIntent());
-                        overridePendingTransition(0, 0);
-                    }
-                });
-                btnCancleHomeVictory.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        startActivity(new Intent(FastPlayActivity.this,HomeActivity.class));
-                        finish();
-                    }
-                });
-                builder.setView(view1);
-                builder.create();
-                builder.show();
-                countDownTimer.cancel();
-            }
-            chuyenCau();
-        }else{
-            View view1 = LayoutInflater.from(FastPlayActivity.this).inflate(R.layout.dialog_hetgio, null);
-            tvDiemend =  view1.findViewById(R.id.tvDiemend);
-            btnChoiLai = view1.findViewById(R.id.btnChoiLai);
-            btnCancleHome =  view1.findViewById(R.id.btnCancleHome);
-            btnChoiLai.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    finish();
-                    overridePendingTransition(0, 0);
-                    startActivity(getIntent());
-                    overridePendingTransition(0, 0);
-                }
-            });
-            btnCancleHome.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(new Intent(FastPlayActivity.this,HomeActivity.class));
-                    finish();
-                }
-            });
-            tvDiemend.setText(Scores+"");
-            builder.setView(view1);
-
-            builder.create();
-            builder.show();
-            countDownTimer.cancel();
-        }
+        quizPresenter.clickDapAn(tvDaB.getText().toString().trim(),cauHoiList.get(position).getDapAnDung());
     }
 
     public void clickC(View view) {
-        if (tvDaC.getText().toString().trim().equals(cauHoiList.get(position).getDapAnDung())){
-            Scores+=1;
-            tvdiemfas.setText(Scores+"");
-            if (Scores==10){
-                View view1 = LayoutInflater.from(FastPlayActivity.this).inflate(R.layout.dialog_victory, null);
-                tvDiemthang = (TextView) view1.findViewById(R.id.tvDiemthang);
-                btnChoiTiep = (Button) view1.findViewById(R.id.btnChoiTiep);
-                btnCancleHomeVictory = (Button) view1.findViewById(R.id.btnCancleHomeVictory);
-                tvDiemthang.setText(Scores+"");
-                btnChoiTiep.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        finish();
-                        overridePendingTransition(0, 0);
-                        startActivity(getIntent());
-                        overridePendingTransition(0, 0);
-                    }
-                });
-                btnCancleHomeVictory.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        startActivity(new Intent(FastPlayActivity.this,HomeActivity.class));
-                        finish();
-                    }
-                });
-                builder.setView(view1);
-                builder.create();
-                builder.show();
-                countDownTimer.cancel();
-            }
-            chuyenCau();
-        }else{
-            View view1 = LayoutInflater.from(FastPlayActivity.this).inflate(R.layout.dialog_hetgio, null);
-            tvDiemend =  view1.findViewById(R.id.tvDiemend);
-            btnChoiLai = view1.findViewById(R.id.btnChoiLai);
-            btnCancleHome =  view1.findViewById(R.id.btnCancleHome);
-            btnChoiLai.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    finish();
-                    overridePendingTransition(0, 0);
-                    startActivity(getIntent());
-                    overridePendingTransition(0, 0);
-                }
-            });
-            btnCancleHome.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(new Intent(FastPlayActivity.this,HomeActivity.class));
-                    finish();
-                }
-            });
-            tvDiemend.setText(Scores+"");
-            builder.setView(view1);
-            builder.create();
-            builder.show();
-            countDownTimer.cancel();
-        }
+        quizPresenter.clickDapAn(tvDaC.getText().toString().trim(),cauHoiList.get(position).getDapAnDung());
     }
 
     public void clickD(View view) {
-        if (tvDaD.getText().toString().trim().equals(cauHoiList.get(position).getDapAnDung())){
-            Scores+=1;
-            tvdiemfas.setText(Scores+"");
-            if (Scores==10){
-                View view1 = LayoutInflater.from(FastPlayActivity.this).inflate(R.layout.dialog_victory, null);
+        quizPresenter.clickDapAn(tvDaD.getText().toString().trim(),cauHoiList.get(position).getDapAnDung());
+
+    }
+
+    public void quayLaiManHome(){
+        startActivity(new Intent(FastPlayActivity.this,HomeActivity.class));
+        finish();
+    }
+
+    @Override
+    public void time() {
+        giayClock = 90;
+        countDownTimer = new CountDownTimer(giayClock * 1000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                giayClock--;
+                tvTimecout.setText(giayClock + "");
+            }
+
+            @Override
+            public void onFinish() {
+                //hết giờ chơi
+
+                View view1 = LayoutInflater.from(FastPlayActivity.this).inflate(R.layout.dialog_hetgio, null);
                 tvDiemthang = (TextView) view1.findViewById(R.id.tvDiemthang);
                 btnChoiTiep = (Button) view1.findViewById(R.id.btnChoiTiep);
                 btnCancleHomeVictory = (Button) view1.findViewById(R.id.btnCancleHomeVictory);
@@ -436,20 +321,45 @@ public void chuyenCau(){
                     public void onClick(View v) {
                         startActivity(new Intent(FastPlayActivity.this,HomeActivity.class));
                         finish();
+
                     }
                 });
                 builder.setView(view1);
                 builder.create();
                 builder.show();
-                countDownTimer.cancel();
+//                Button btnNoDialog;
+//                Button btnYesDialog;
+
             }
-            chuyenCau();
-        }else{
-            View view1 = LayoutInflater.from(FastPlayActivity.this).inflate(R.layout.dialog_hetgio, null);
-            tvDiemend =  view1.findViewById(R.id.tvDiemend);
-            btnChoiLai = view1.findViewById(R.id.btnChoiLai);
-            btnCancleHome =  view1.findViewById(R.id.btnCancleHome);
-            btnChoiLai.setOnClickListener(new View.OnClickListener() {
+        };
+        countDownTimer.start();
+    }
+
+    @Override
+    public void chuyencau() {
+        int sobatky=1;
+        sobatky=random.nextInt(10);
+        position+=2;
+        tvQuetion.setText(cauHoiList.get(position).getCauHoi());
+        tvTlA.setText(cauHoiList.get(position).getDapAnA());
+        tvtlB.setText(cauHoiList.get(position).getDapAnB());
+        tvTlC.setText(cauHoiList.get(position).getDapAnC());
+        tvTlD.setText(cauHoiList.get(position).getDapAnD());
+    }
+
+    @Override
+    public void tinhDiem() {
+
+        if (Scores < 2) {
+            Scores++;
+            tvdiemfas.setText(Scores + "");
+        } else {
+            View view1 = LayoutInflater.from(FastPlayActivity.this).inflate(R.layout.dialog_victory, null);
+            tvDiemthang = (TextView) view1.findViewById(R.id.tvDiemthang);
+            btnChoiTiep = (Button) view1.findViewById(R.id.btnChoiTiep);
+            btnCancleHomeVictory = (Button) view1.findViewById(R.id.btnCancleHomeVictory);
+            tvDiemthang.setText(Scores + "");
+            btnChoiTiep.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     finish();
@@ -458,19 +368,145 @@ public void chuyenCau(){
                     overridePendingTransition(0, 0);
                 }
             });
-            btnCancleHome.setOnClickListener(new View.OnClickListener() {
+            btnCancleHomeVictory.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(FastPlayActivity.this,HomeActivity.class));
+                    startActivity(new Intent(FastPlayActivity.this, HomeActivity.class));
                     finish();
+
                 }
             });
-            tvDiemend.setText(Scores+"");
             builder.setView(view1);
             builder.create();
             builder.show();
-            countDownTimer.cancel();
+
+//        if (Scores==10){
+//            View view1 = LayoutInflater.from(SinhActivity.this).inflate(R.layout.dialog_victory, null);
+//            tvDiemthang = (TextView) view1.findViewById(R.id.tvDiemthang);
+//            btnChoiTiep = (Button) view1.findViewById(R.id.btnChoiTiep);
+//            btnCancleHomeVictory = (Button) view1.findViewById(R.id.btnCancleHomeVictory);
+//            tvDiemthang.setText(Scores+"");
+//            btnChoiTiep.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    finish();
+//                    overridePendingTransition(0, 0);
+//                    startActivity(getIntent());
+//                    overridePendingTransition(0, 0);
+//                }
+//            });
+//            btnCancleHomeVictory.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    startActivity(new Intent(SinhActivity.this,HomeActivity.class));
+//                    finish();
+//
+//                }
+//            });
+//            builder.setView(view1);
+//            builder.create();
+//            builder.show();
+//        }
+//       else
+//            Scores++;
+//            tvdiemSinh.setText(Scores+"");
+
         }
+
+    }
+
+    @Override
+    public void amThanhDung() {
+        MediaPlayer mediaPlayer= MediaPlayer.create(FastPlayActivity.this, R.raw.dung);
+        mediaPlayer.start();
+    }
+
+    @Override
+    public void amThanhSai() {
+        MediaPlayer mediaPlayer= MediaPlayer.create(FastPlayActivity.this, R.raw.sai);
+        mediaPlayer.start();
+    }
+
+    @Override
+    public void showKetQua() {
+
+    }
+
+    @Override
+    public void timeStop() {
+
+        countDownTimer.cancel();
+
+    }
+
+    @Override
+    public void showDialogthua() {
+
+        View view1 = LayoutInflater.from(FastPlayActivity.this).inflate(R.layout.dialog_hetgio, null);
+        tvDiemend =  view1.findViewById(R.id.tvDiemend);
+        btnChoiLai = view1.findViewById(R.id.btnChoiLai);
+        edtNguoiChoi=view1.findViewById(R.id.edtTenNguoiChoi);
+        btnLuuNguoiChoi=view1.findViewById(R.id.btnLuuDiem);
+        btnLuuNguoiChoi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                long kq=sqlOpenHelper.insertUser(new NguoiChoi(edtNguoiChoi.getText().toString(),Scores+""));
+                if (kq>0){
+                    Toast.makeText(FastPlayActivity.this, "Thêm Thành Công", Toast.LENGTH_SHORT).show();
+                }
+                quayLaiManHome();
+                alertDialog.dismiss();
+            }
+        });
+        btnCancleHome =  view1.findViewById(R.id.btnCancleHome);
+        btnChoiLai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                overridePendingTransition(0, 0);
+                startActivity(getIntent());
+                overridePendingTransition(0, 0);
+            }
+        });
+        btnCancleHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(FastPlayActivity.this,HomeActivity.class));
+                finish();
+            }
+        });
+        tvDiemend.setText(Scores+"");
+        builder.setView(view1);
+        builder.create();
+        alertDialog=builder.show();
+
+    }
+
+    @Override
+    public void trangThaiChonTat() {
+        lrlDaD.setClickable(false);
+        lrlDaA.setClickable(false);
+        lrlDaB.setClickable(false);
+        lrlDaC.setClickable(false);
+    }
+
+    @Override
+    public void dapAnA() {
+
+    }
+
+    @Override
+    public void dapAnB() {
+
+    }
+
+    @Override
+    public void dapAnC() {
+
+    }
+
+    @Override
+    public void dapAnD() {
 
     }
 }

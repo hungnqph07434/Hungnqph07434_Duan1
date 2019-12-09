@@ -1,5 +1,6 @@
 package com.poly.hungnqph07434_duan1.datasql;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -8,6 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.poly.hungnqph07434_duan1.model.CauHoi;
+import com.poly.hungnqph07434_duan1.model.NguoiChoi;
 import com.poly.hungnqph07434_duan1.model.User;
 
 import java.io.File;
@@ -126,6 +128,30 @@ public class SqlOpenHelper extends SQLiteOpenHelper {
         return khoanThuChis;
     }
 
+    public List<NguoiChoi> getAllNguoiChoi(){
+        List<NguoiChoi> nguoiChois = new ArrayList<>();
+        String SELECT = "SELECT * FROM nguoiChoi";
+
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+
+        Cursor cursor = sqLiteDatabase.rawQuery(SELECT, null);
+
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                NguoiChoi nguoiChoi= new NguoiChoi();
+                nguoiChoi.setTen(cursor.getString(0));
+                nguoiChoi.setDiem(cursor.getString(1));
+                nguoiChois.add(nguoiChoi);
+                cursor.moveToNext();
+            }
+            cursor.close();
+        }
+        sqLiteDatabase.close();
+
+        return nguoiChois;
+    }
+
     public List<CauHoi> getAllCauHoi(){
         List<CauHoi> cauHois = new ArrayList<>();
         String SELECT = "SELECT * FROM dataCauHoi";
@@ -152,6 +178,32 @@ public class SqlOpenHelper extends SQLiteOpenHelper {
         sqLiteDatabase.close();
 
         return cauHois;
+    }
+
+    public long insertUser(User user) {
+        SQLiteDatabase sqLiteDatabase= this.getWritableDatabase();
+        ContentValues contentValues= new ContentValues();
+
+        contentValues.put("userName",user.getName());
+        contentValues.put("password",user.getPassword());
+        contentValues.put("phone",user.getPhone());
+        contentValues.put("hoten",user.getHoten());
+
+        long kq=sqLiteDatabase.insert("user", null,contentValues);
+        sqLiteDatabase.close();
+        return kq;
+    }
+
+    public long insertUser(NguoiChoi nguoiChoi) {
+        SQLiteDatabase sqLiteDatabase= this.getWritableDatabase();
+        ContentValues contentValues= new ContentValues();
+
+        contentValues.put("tenNguoiChoi",nguoiChoi.getTen());
+        contentValues.put("Diem",nguoiChoi.getDiem());
+
+        long kq=sqLiteDatabase.insert("nguoiChoi", null,contentValues);
+        sqLiteDatabase.close();
+        return kq;
     }
 
 

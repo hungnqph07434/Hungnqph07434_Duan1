@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/custom_playconten"
+    android:background="@drawable/backgroudcacmon"
     android:orientation="vertical"
     tools:context=".activity.FastPlayActivity">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/time"
         android:layout_width="match_parent"
+
         android:layout_height="wrap_content"
         android:background="#1E2146"
         app:layout_constraintBottom_toBottomOf="parent"

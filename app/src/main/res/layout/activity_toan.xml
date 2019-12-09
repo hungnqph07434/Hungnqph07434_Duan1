@@ -4,11 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/backgroudcacmon"
     android:layout_height="match_parent"
     tools:context=".activity.ToanActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/time"
+        android:id="@+id/timeToan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#1E2146"
@@ -36,7 +37,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tvdiemfas"
+            android:id="@+id/tvdiemToan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="2dp"
@@ -53,7 +54,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tvTimecout"
+            android:id="@+id/tvTimecoutToan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
@@ -71,7 +72,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
-        android:id="@+id/tvQuetion"
+        android:id="@+id/tvQuetionToan"
         android:layout_width="match_parent"
         android:layout_height="251dp"
         android:background="@drawable/custom_playconten"
@@ -87,7 +88,7 @@ Phú ông xin đổi…”?"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
         app:layout_constraintVertical_bias="0.0" />
     <LinearLayout
-        android:id="@+id/lrlDaA"
+        android:id="@+id/lrlDaAToan"
         android:layout_width="match_parent"
         android:onClick="clickA"
         android:layout_height="wrap_content"
@@ -97,7 +98,7 @@ Phú ông xin đổi…”?"
         >
 
         <TextView
-            android:id="@+id/tvDaA"
+            android:id="@+id/tvDaAToan"
             android:textStyle="bold"
             android:textColor="#FFF"
             android:textSize="20dp"
@@ -108,7 +109,7 @@ Phú ông xin đổi…”?"
             android:layout_height="wrap_content"/>
 
         <TextView
-            android:id="@+id/tvTlA"
+            android:id="@+id/tvTlAToan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -121,7 +122,7 @@ Phú ông xin đổi…”?"
 
 
     <LinearLayout
-        android:id="@+id/lrlDaB"
+        android:id="@+id/lrlDaBToan"
         android:layout_width="match_parent"
         android:onClick="clickB"
         android:layout_height="wrap_content"
@@ -131,7 +132,7 @@ Phú ông xin đổi…”?"
         >
 
         <TextView
-            android:id="@+id/tvDaB"
+            android:id="@+id/tvDaBToan"
             android:textStyle="bold"
             android:textColor="#FFF"
             android:textSize="20dp"
@@ -143,7 +144,7 @@ Phú ông xin đổi…”?"
             android:layout_height="wrap_content"/>
 
         <TextView
-            android:id="@+id/tvtlB"
+            android:id="@+id/tvtlBToan"
             android:textColor="#FFF"
             android:layout_marginLeft="2dp"
             android:layout_gravity="center_vertical"
@@ -154,7 +155,7 @@ Phú ông xin đổi…”?"
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/lrlDaC"
+        android:id="@+id/lrlDaCToan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -164,7 +165,7 @@ Phú ông xin đổi…”?"
         >
 
         <TextView
-            android:id="@+id/tvDaC"
+            android:id="@+id/tvDaCToan"
             android:textStyle="bold"
             android:textColor="#FFF"
             android:textSize="20dp"
@@ -176,7 +177,7 @@ Phú ông xin đổi…”?"
             android:layout_height="wrap_content"/>
 
         <TextView
-            android:id="@+id/tvTlC"
+            android:id="@+id/tvTlCToan"
             android:textColor="#FFF"
             android:layout_marginLeft="2dp"
             android:layout_gravity="center_vertical"
@@ -187,7 +188,7 @@ Phú ông xin đổi…”?"
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/lrlDaD"
+        android:id="@+id/lrlDaDToan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -197,19 +198,19 @@ Phú ông xin đổi…”?"
         >
 
         <TextView
-            android:id="@+id/tvDaD"
+            android:id="@+id/tvDaDToan"
             android:textStyle="bold"
             android:textColor="#FFF"
             android:textSize="20dp"
             android:layout_marginLeft="30dp"
 
             android:layout_gravity="right"
-            android:text="D  "
+            android:text="D "
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
         <TextView
-            android:id="@+id/tvTlD"
+            android:id="@+id/tvTlDToan"
             android:textColor="#FFF"
             android:layout_marginLeft="8dp"
             android:layout_gravity="center_vertical"
@@ -229,7 +230,7 @@ Phú ông xin đổi…”?"
             android:text="Câu Tiếp Theo"
             android:textColor="#FFFF"
             android:textSize="20dp"
-            android:id="@+id/btnNextQue"
+            android:id="@+id/btnNextQueToan"
             android:onClick="cauTiepTheo"
             android:background="@drawable/custom_ketquadialog"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -245,7 +246,7 @@ Phú ông xin đổi…”?"
             android:src="@drawable/setting"
             android:layout_margin="8dp"
             android:layout_gravity="right"
-            android:id="@+id/setting_fast"
+            android:id="@+id/setting_fastToan"
             android:onClick="settingFast"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

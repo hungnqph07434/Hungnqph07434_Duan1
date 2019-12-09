@@ -1,16 +1,13 @@
 package com.poly.hungnqph07434_duan1.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.view.View;
 
+import com.poly.hungnqph07434_duan1.BaseActivity;
 import com.poly.hungnqph07434_duan1.R;
 import com.poly.hungnqph07434_duan1.datasql.SqlOpenHelper;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
     private SqlOpenHelper sqlOpenHelper;
 
 
@@ -25,10 +22,10 @@ public class MainActivity extends AppCompatActivity {
         mediaPlayer.start();
         //jnJsdnahkjsda
         // them text
+startActivityAnimation(this,2000, HelloActivity.class);
+
+
     }
 
-    public void playNow(View view) {
-        startActivity(new Intent(MainActivity.this, LoginActivity.class));
-        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-    }
+
 }

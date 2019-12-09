@@ -14,12 +14,21 @@ public class QuizPresenter {
         this.quizView = quizView;
     }
 
-    public void clickDapAn(String DapAn, int position, int Scores){
-         cauHois= new ArrayList<>();
-        if (DapAn.equals( cauHois.get(position).getDapAnDung())){
-            Scores++;
+    public void clickDapAn(String DapAn, String DapAnDung){
+
+        if (DapAn.equalsIgnoreCase(DapAnDung)){
+            quizView.tinhDiem();
             quizView.chuyencau();
+            quizView.amThanhDung();
         }
+        else {
+            quizView.amThanhSai();
+            quizView.showKetQua();
+            quizView.timeStop();
+            quizView.trangThaiChonTat();
+            quizView.showDialogthua();
+        }
+
     }
 
 }
