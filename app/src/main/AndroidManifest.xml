@@ -10,12 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activity.HelloActivity"></activity>
-        <activity android:name=".activity.DiaActivity" />
-        <activity android:name=".activity.SuActivity" />
-        <activity android:name=".activity.SinhActivity" />
-        <activity android:name=".activity.HoaActivity" />
-        <activity android:name=".activity.VatlyActivity" />
-        <activity android:name=".activity.ToanActivity" />
         <activity android:name=".activity.SuperPlayActivity" />
         <activity android:name=".Main3Activity" />
         <activity android:name=".activity.TopActivity" />

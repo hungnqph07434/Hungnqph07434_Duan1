@@ -28,6 +28,7 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         setContentView(R.layout.activity_home);
         imgFastPlay = (ImageView) findViewById(R.id.imgFastPlay);
         imgTop = (ImageView) findViewById(R.id.imgTop);
@@ -37,12 +38,12 @@ public class HomeActivity extends AppCompatActivity {
         Animation animation1 = AnimationUtils.loadAnimation(this, R.anim.an_lefthome);
         animation1.setInterpolator(new LinearInterpolator());
         imgFastPlay.startAnimation(animation1);
-        imgTop.startAnimation(animation1);
+
 
         Animation animation2 = AnimationUtils.loadAnimation(this, R.anim.an_righthome);
         animation1.setInterpolator(new LinearInterpolator());
 //        imgSetting.startAnimation(animation2);
-
+        imgTop.startAnimation(animation2);
         imgsuperplay.startAnimation(animation1);
 
 

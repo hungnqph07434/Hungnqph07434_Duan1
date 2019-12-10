@@ -16,7 +16,9 @@ public class HelloActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hello);
 
+        MediaPlayer mediaPlayer= MediaPlayer.create(HelloActivity.this, R.raw.nhacnen);
 
+        mediaPlayer.start();
 
     }
 

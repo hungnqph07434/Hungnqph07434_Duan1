@@ -17,9 +17,7 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         sqlOpenHelper= new SqlOpenHelper(MainActivity.this);
         sqlOpenHelper.createDataBase();
-        MediaPlayer mediaPlayer= MediaPlayer.create(MainActivity.this, R.raw.nhacnen);
 
-        mediaPlayer.start();
         //jnJsdnahkjsda
         // them text
 startActivityAnimation(this,2000, HelloActivity.class);

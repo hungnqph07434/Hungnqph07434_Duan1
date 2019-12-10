@@ -112,7 +112,7 @@ private Random random;
         tvDaC = (TextView) findViewById(R.id.tvDaC);
         tvDaD = (TextView) findViewById(R.id.tvDaD);
         tvTlD = (TextView) findViewById(R.id.tvTlD);
-        imgsettingFast = (ImageView) findViewById(R.id.setting_fast);
+//        imgsettingFast = (ImageView) findViewById(R.id.setting_fast);
 //Gắn điểm bằng 0;
 
         nguoiChois= new ArrayList<>();
@@ -130,7 +130,7 @@ private Random random;
         tvQuetion.startAnimation(animation1);
         lrlDaB.startAnimation(animation1);
         lrlDaD.startAnimation(animation1);
-        imgsettingFast.startAnimation(animation1);
+//        imgsettingFast.startAnimation(animation1);
 
         //Khởi tạo dữ liệu
         sqlOpenHelper  = new SqlOpenHelper(FastPlayActivity.this);
@@ -141,7 +141,7 @@ private Random random;
 //Khởi tạo vị trí lấy câu hỏi.
         random= new Random();
         Scores=0;
-        position=random.nextInt(450);
+        position=random.nextInt(200);
 
         builder = new AlertDialog.Builder(FastPlayActivity.this, R.style.DialogCustomTheme);
 
@@ -224,11 +224,6 @@ tvTlD.setText(cauHoiList.get(position).getDapAnD());
 
 
 
-public void clickDapAn(){
-        if (lrlDaA.isSelected()){
-
-        }
-}
 
 public void chuyenCau(){
         int sobatky=1;
@@ -350,7 +345,7 @@ public void chuyenCau(){
     @Override
     public void tinhDiem() {
 
-        if (Scores < 2) {
+        if (Scores < 10) {
             Scores++;
             tvdiemfas.setText(Scores + "");
         } else {
@@ -453,9 +448,13 @@ public void chuyenCau(){
                 long kq=sqlOpenHelper.insertUser(new NguoiChoi(edtNguoiChoi.getText().toString(),Scores+""));
                 if (kq>0){
                     Toast.makeText(FastPlayActivity.this, "Thêm Thành Công", Toast.LENGTH_SHORT).show();
+                    quayLaiManHome();
+                    alertDialog.dismiss();
                 }
-                quayLaiManHome();
-                alertDialog.dismiss();
+                else {
+                    Toast.makeText(FastPlayActivity.this, "Tên đã tồn tại! Hãy thử với một tên khác! ", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
         btnCancleHome =  view1.findViewById(R.id.btnCancleHome);

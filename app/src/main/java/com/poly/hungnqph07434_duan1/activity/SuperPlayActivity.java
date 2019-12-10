@@ -14,13 +14,16 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.poly.hungnqph07434_duan1.R;
 import com.poly.hungnqph07434_duan1.datasql.SqlOpenHelper;
 import com.poly.hungnqph07434_duan1.model.CauHoi;
+import com.poly.hungnqph07434_duan1.model.NguoiChoi;
 import com.poly.hungnqph07434_duan1.modelview.QuizView;
 import com.poly.hungnqph07434_duan1.presenter.QuizPresenter;
 
@@ -46,7 +49,7 @@ public class SuperPlayActivity extends AppCompatActivity implements QuizView {
     private LinearLayout lrlDaDSinh;
     private TextView tvDaDSinh;
     private TextView tvTlDSinh;
-    private Button btnNextQueSinh;
+    private Button btnNextQueSinh,  btnLuuNguoiChoi;
     private ImageView settingFastSinh;
 
 
@@ -71,6 +74,10 @@ public class SuperPlayActivity extends AppCompatActivity implements QuizView {
     private Button btnCancleHomeVictory;
 
     private QuizPresenter quizPresenter;
+
+    private EditText edtNguoiChoi;
+
+    private AlertDialog alertDialog;
 
 
 
@@ -100,7 +107,7 @@ public class SuperPlayActivity extends AppCompatActivity implements QuizView {
         tvDaDSinh = (TextView) findViewById(R.id.tvDaDSinh);
         tvTlDSinh = (TextView) findViewById(R.id.tvTlDSinh);
         btnNextQueSinh = (Button) findViewById(R.id.btnNextQueSinh);
-        settingFastSinh = (ImageView) findViewById(R.id.setting_fastSinh);
+//        settingFastSinh = (ImageView) findViewById(R.id.setting_fastSinh);
 
         quizPresenter= new QuizPresenter(this);
 
@@ -119,7 +126,7 @@ public class SuperPlayActivity extends AppCompatActivity implements QuizView {
         tvQuetionSinh.startAnimation(animation1);
         lrlDaBSinh.startAnimation(animation1);
         lrlDaDSinh.startAnimation(animation1);
-        settingFastSinh.startAnimation(animation1);
+//        settingFastSinh.startAnimation(animation1);
 
 
 
@@ -185,7 +192,6 @@ public class SuperPlayActivity extends AppCompatActivity implements QuizView {
             @Override
             public void onFinish() {
                 //hết giờ chơi
-
                 View view1 = LayoutInflater.from(SuperPlayActivity.this).inflate(R.layout.dialog_hetgio, null);
                 tvDiemthang = (TextView) view1.findViewById(R.id.tvDiemthang);
                 btnChoiTiep = (Button) view1.findViewById(R.id.btnChoiTiep);
@@ -352,6 +358,24 @@ public class SuperPlayActivity extends AppCompatActivity implements QuizView {
         tvDiemend =  view1.findViewById(R.id.tvDiemend);
         btnChoiLai = view1.findViewById(R.id.btnChoiLai);
         btnCancleHome =  view1.findViewById(R.id.btnCancleHome);
+        edtNguoiChoi=view1.findViewById(R.id.edtTenNguoiChoi);
+        btnLuuNguoiChoi=view1.findViewById(R.id.btnLuuDiem);
+        btnLuuNguoiChoi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                long kq=sqlOpenHelper.insertUser(new NguoiChoi(edtNguoiChoi.getText().toString(),Scores+""));
+                if (kq>0){
+                    Toast.makeText(SuperPlayActivity.this, "Thêm Thành Công", Toast.LENGTH_SHORT).show();
+
+                    quayLaiManHome();
+                    alertDialog.dismiss();
+                }
+                else {
+                    Toast.makeText(SuperPlayActivity.this, "Tên đã tồn tại! Hãy thử với một tên khác! ", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
         btnChoiLai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -374,7 +398,10 @@ public class SuperPlayActivity extends AppCompatActivity implements QuizView {
         builder.show();
 
     }
-
+    public void quayLaiManHome(){
+        startActivity(new Intent(SuperPlayActivity.this,HomeActivity.class));
+        finish();
+    }
     @Override
     public void trangThaiChonTat() {
         lrlDaDSinh.setClickable(false);

@@ -17,6 +17,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
+        app:fontFamily="@font/fontdiner_swanky"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.022" />
 
@@ -31,6 +32,7 @@
         android:textStyle="bold"
         android:layout_gravity="center"
         android:layout_marginTop="32dp"
+        app:fontFamily="@font/fontdiner_swanky"
         android:background="@drawable/custom_ketquadialog" />
 
     <LinearLayout
@@ -47,6 +49,7 @@
             android:layout_height="40dp"
             android:text="Chơi Tiep"
             android:textColor="#fff"
+            app:fontFamily="@font/fontdiner_swanky"
             android:background="@drawable/custom_ketquadialog"/>
 
         <Button
@@ -54,6 +57,7 @@
             android:id="@+id/btnCancleHomeVictory"
             android:layout_width="120dp"
             android:text="Home"
+            app:fontFamily="@font/fontdiner_swanky"
             android:textColor="#fff"
             android:layout_height="40dp"
             android:background="@drawable/custom_ketquadialog"/>
