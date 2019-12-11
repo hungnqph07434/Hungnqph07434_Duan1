@@ -445,15 +445,21 @@ public void chuyenCau(){
         btnLuuNguoiChoi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                long kq=sqlOpenHelper.insertUser(new NguoiChoi(edtNguoiChoi.getText().toString(),Scores+""));
-                if (kq>0){
-                    Toast.makeText(FastPlayActivity.this, "Thêm Thành Công", Toast.LENGTH_SHORT).show();
-                    quayLaiManHome();
-                    alertDialog.dismiss();
+                if (edtNguoiChoi.getText().toString().equals("")){
+                    Toast.makeText(FastPlayActivity.this, "Bạn chua nhập tên!", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    Toast.makeText(FastPlayActivity.this, "Tên đã tồn tại! Hãy thử với một tên khác! ", Toast.LENGTH_SHORT).show();
+                    long kq=sqlOpenHelper.insertUser(new NguoiChoi(edtNguoiChoi.getText().toString(),Scores+""));
+                    if (kq>0){
+                        Toast.makeText(FastPlayActivity.this, "Thêm Thành Công", Toast.LENGTH_SHORT).show();
+                        quayLaiManHome();
+                        alertDialog.dismiss();
+                    }
+                    else {
+                        Toast.makeText(FastPlayActivity.this, "Tên đã tồn tại! Hãy thử với một tên khác! ", Toast.LENGTH_SHORT).show();
+                    }
                 }
+
 
             }
         });

@@ -174,6 +174,9 @@ public class SuperPlayActivity extends AppCompatActivity implements QuizView {
     }
 
     public void cauTiepTheo(View view) {
+        MediaPlayer mediaPlayer= MediaPlayer.create(SuperPlayActivity.this, R.raw.nutan);
+        mediaPlayer.start();
+        chuyencau();
     }
 
     public void settingFast(View view) {
@@ -363,16 +366,22 @@ public class SuperPlayActivity extends AppCompatActivity implements QuizView {
         btnLuuNguoiChoi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                long kq=sqlOpenHelper.insertUser(new NguoiChoi(edtNguoiChoi.getText().toString(),Scores+""));
-                if (kq>0){
-                    Toast.makeText(SuperPlayActivity.this, "Thêm Thành Công", Toast.LENGTH_SHORT).show();
-
-                    quayLaiManHome();
-                    alertDialog.dismiss();
+                if (edtNguoiChoi.getText().toString().equals("")){
+                    Toast.makeText(SuperPlayActivity.this, "Bạn chưa nhập tên", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    Toast.makeText(SuperPlayActivity.this, "Tên đã tồn tại! Hãy thử với một tên khác! ", Toast.LENGTH_SHORT).show();
+                    long kq=sqlOpenHelper.insertUser(new NguoiChoi(edtNguoiChoi.getText().toString(),Scores+""));
+                    if (kq>0){
+                        Toast.makeText(SuperPlayActivity.this, "Thêm Thành Công", Toast.LENGTH_SHORT).show();
+
+                        quayLaiManHome();
+                        alertDialog.dismiss();
+                    }
+                    else {
+                        Toast.makeText(SuperPlayActivity.this, "Tên đã tồn tại! Hãy thử với một tên khác! ", Toast.LENGTH_SHORT).show();
+                    }
                 }
+
 
             }
         });
