@@ -395,7 +395,7 @@ public class SuperPlayActivity extends AppCompatActivity implements QuizView {
         tvDiemend.setText(Scores+"");
         builder.setView(view1);
         builder.create();
-        builder.show();
+        alertDialog=builder.show();
 
     }
     public void quayLaiManHome(){
