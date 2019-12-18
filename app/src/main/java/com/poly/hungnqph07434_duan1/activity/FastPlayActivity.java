@@ -226,14 +226,20 @@ tvTlD.setText(cauHoiList.get(position).getDapAnD());
 
 
 public void chuyenCau(){
-        int sobatky=1;
-        sobatky=random.nextInt(10);
-    position+=2;
-    tvQuetion.setText(cauHoiList.get(position).getCauHoi());
-    tvTlA.setText(cauHoiList.get(position).getDapAnA());
-    tvtlB.setText(cauHoiList.get(position).getDapAnB());
-    tvTlC.setText(cauHoiList.get(position).getDapAnC());
-    tvTlD.setText(cauHoiList.get(position).getDapAnD());
+        int sobatky;
+        sobatky=random.nextInt(3);
+        if (position>=490){
+            position=random.nextInt(200);
+        }
+        else {
+            position+=1;
+            tvQuetion.setText(cauHoiList.get(position).getCauHoi());
+            tvTlA.setText(cauHoiList.get(position).getDapAnA());
+            tvtlB.setText(cauHoiList.get(position).getDapAnB());
+            tvTlC.setText(cauHoiList.get(position).getDapAnC());
+            tvTlD.setText(cauHoiList.get(position).getDapAnD());
+        }
+
 }
 //Chuyển câu tiếp theo.
     public void cauTiepTheo(View view) {
