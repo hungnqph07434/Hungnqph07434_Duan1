@@ -130,7 +130,7 @@ public class SqlOpenHelper extends SQLiteOpenHelper {
 
     public List<NguoiChoi> getAllNguoiChoi(){
         List<NguoiChoi> nguoiChois = new ArrayList<>();
-        String SELECT = "SELECT * FROM nguoiChoi GROUP  by nguoiChoi.tenNguoiChoi ORDER by nguoiChoi.tenNguoiChoi ASC LIMIT 10";
+        String SELECT = "SELECT * FROM nguoiChoi GROUP  by nguoiChoi.Diem ORDER by nguoiChoi.Diem ASC LIMIT 10";
 
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
 
