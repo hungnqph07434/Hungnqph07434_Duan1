@@ -455,7 +455,7 @@ public void chuyenCau(){
                     Toast.makeText(FastPlayActivity.this, "Bạn chua nhập tên!", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    long kq=sqlOpenHelper.insertUser(new NguoiChoi(edtNguoiChoi.getText().toString(),Scores+""));
+                    long kq=sqlOpenHelper.insertUser(new NguoiChoi(edtNguoiChoi.getText().toString(),Scores));
                     if (kq>0){
                         Toast.makeText(FastPlayActivity.this, "Thêm Thành Công", Toast.LENGTH_SHORT).show();
                         quayLaiManHome();

@@ -37,8 +37,8 @@ public class NguoiChoiAdapter extends RecyclerView.Adapter<NguoiChoiAdapter.Recy
 
     @Override
     public void onBindViewHolder(@NonNull NguoiChoiAdapter.RecyclerViewHodler holder, int position) {
-        holder.tvDiemNguoiChoi.setText(nguoiChois.get(position).getDiem());
         holder.tvTenNguoiChoi.setText(nguoiChois.get(position).getTen());
+        holder.tvDiemNguoiChoi.setText(String.valueOf(nguoiChois.get(position).getDiem()));
     }
 
     @Override

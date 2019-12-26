@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.poly.hungnqph07434_duan1.model.CauHoi;
+import com.poly.hungnqph07434_duan1.model.CauHoiKho;
 import com.poly.hungnqph07434_duan1.model.NguoiChoi;
 import com.poly.hungnqph07434_duan1.model.User;
 
@@ -130,7 +131,7 @@ public class SqlOpenHelper extends SQLiteOpenHelper {
 
     public List<NguoiChoi> getAllNguoiChoi(){
         List<NguoiChoi> nguoiChois = new ArrayList<>();
-        String SELECT = "SELECT * FROM nguoiChoi GROUP  by nguoiChoi.Diem ORDER by nguoiChoi.Diem ASC LIMIT 10";
+        String SELECT = "SELECT * FROM nguoiChoi GROUP  by nguoiChoi.Diem ORDER by nguoiChoi.Diem DESC LIMIT 10";
 
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
 
@@ -141,7 +142,7 @@ public class SqlOpenHelper extends SQLiteOpenHelper {
             while (!cursor.isAfterLast()) {
                 NguoiChoi nguoiChoi= new NguoiChoi();
                 nguoiChoi.setTen(cursor.getString(0));
-                nguoiChoi.setDiem(cursor.getString(1));
+                nguoiChoi.setDiem(cursor.getInt(1));
                 nguoiChois.add(nguoiChoi);
                 cursor.moveToNext();
             }
@@ -164,12 +165,12 @@ public class SqlOpenHelper extends SQLiteOpenHelper {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
                 CauHoi cauHoi= new CauHoi();
-              cauHoi.setCauHoi(cursor.getString(0));
-              cauHoi.setDapAnA(cursor.getString(1));
-              cauHoi.setDapAnB(cursor.getString(2));
-              cauHoi.setDapAnC(cursor.getString(3));
-              cauHoi.setDapAnD(cursor.getString(4));
-              cauHoi.setDapAnDung(cursor.getString(5));
+                cauHoi.setCauHoi(cursor.getString(0));
+                cauHoi.setDapAnA(cursor.getString(1));
+                cauHoi.setDapAnB(cursor.getString(2));
+                cauHoi.setDapAnC(cursor.getString(3));
+                cauHoi.setDapAnD(cursor.getString(4));
+                cauHoi.setDapAnDung(cursor.getString(5));
                 cauHois.add(cauHoi);
                 cursor.moveToNext();
             }
@@ -179,6 +180,35 @@ public class SqlOpenHelper extends SQLiteOpenHelper {
 
         return cauHois;
     }
+
+    public List<CauHoiKho> getAllCauHoiKho(){
+        List<CauHoiKho> cauHois = new ArrayList<>();
+        String SELECT = "SELECT * FROM datacauhoikho";
+
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+
+        Cursor cursor = sqLiteDatabase.rawQuery(SELECT, null);
+
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                CauHoiKho cauHoi= new CauHoiKho();
+                cauHoi.setCauHoi(cursor.getString(0));
+                cauHoi.setDapAnA(cursor.getString(1));
+                cauHoi.setDapAnB(cursor.getString(2));
+                cauHoi.setDapAnC(cursor.getString(3));
+                cauHoi.setDapAnD(cursor.getString(4));
+                cauHoi.setDapAnDung(cursor.getString(5));
+                cauHois.add(cauHoi);
+                cursor.moveToNext();
+            }
+            cursor.close();
+        }
+        sqLiteDatabase.close();
+
+        return cauHois;
+    }
+
 
     public long insertUser(User user) {
         SQLiteDatabase sqLiteDatabase= this.getWritableDatabase();

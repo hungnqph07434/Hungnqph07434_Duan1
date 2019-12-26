@@ -2,14 +2,15 @@ package com.poly.hungnqph07434_duan1.model;
 
 public class NguoiChoi {
 
-    private String ten, diem;
+    private String ten;
+    private int diem;
 
-    public NguoiChoi() {
-    }
-
-    public NguoiChoi(String ten, String diem) {
+    public NguoiChoi(String ten, int diem) {
         this.ten = ten;
         this.diem = diem;
+    }
+
+    public NguoiChoi() {
     }
 
     public String getTen() {
@@ -20,11 +21,11 @@ public class NguoiChoi {
         this.ten = ten;
     }
 
-    public String getDiem() {
+    public int getDiem() {
         return diem;
     }
 
-    public void setDiem(String diem) {
+    public void setDiem(int diem) {
         this.diem = diem;
     }
 }

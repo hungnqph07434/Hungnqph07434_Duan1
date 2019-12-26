@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.poly.hungnqph07434_duan1.R;
 import com.poly.hungnqph07434_duan1.datasql.SqlOpenHelper;
 import com.poly.hungnqph07434_duan1.model.CauHoi;
+import com.poly.hungnqph07434_duan1.model.CauHoiKho;
 import com.poly.hungnqph07434_duan1.model.NguoiChoi;
 import com.poly.hungnqph07434_duan1.modelview.QuizView;
 import com.poly.hungnqph07434_duan1.presenter.QuizPresenter;
@@ -60,7 +61,7 @@ public class SuperPlayActivity extends AppCompatActivity implements QuizView {
     private AlertDialog.Builder builder;
 
     private SqlOpenHelper sqlOpenHelper;
-    private List<CauHoi> cauHoiList;
+    private List<CauHoiKho> cauHoiList;
 
     private int giayClock;
     private CountDownTimer countDownTimer;
@@ -135,11 +136,11 @@ public class SuperPlayActivity extends AppCompatActivity implements QuizView {
         cauHoiList= new ArrayList<>();
         sqlOpenHelper.createDataBase();
 
-        cauHoiList= sqlOpenHelper.getAllCauHoi();
+        cauHoiList= sqlOpenHelper.getAllCauHoiKho();
 //Khởi tạo vị trí lấy câu hỏi.
         random= new Random();
         Scores=0;
-        position=random.nextInt(450);
+        position=random.nextInt(160);
 
         builder = new AlertDialog.Builder(SuperPlayActivity.this, R.style.DialogCustomTheme);
 
@@ -231,12 +232,18 @@ public class SuperPlayActivity extends AppCompatActivity implements QuizView {
     @Override
     public void chuyencau() {
 
-        position=random.nextInt(400);
-        tvQuetionSinh.setText(cauHoiList.get(position).getCauHoi());
-        tvTlASinh.setText(cauHoiList.get(position).getDapAnA());
-        tvtlBSinh.setText(cauHoiList.get(position).getDapAnB());
-        tvTlCSinh.setText(cauHoiList.get(position).getDapAnC());
-        tvTlDSinh.setText(cauHoiList.get(position).getDapAnD());
+        if(position>161){
+            position=random.nextInt(161);
+        }
+        else {
+            position+=1;
+            tvQuetionSinh.setText(cauHoiList.get(position).getCauHoi());
+            tvTlASinh.setText(cauHoiList.get(position).getDapAnA());
+            tvtlBSinh.setText(cauHoiList.get(position).getDapAnB());
+            tvTlCSinh.setText(cauHoiList.get(position).getDapAnC());
+            tvTlDSinh.setText(cauHoiList.get(position).getDapAnD());
+        }
+
     }
 
     @Override
@@ -370,7 +377,7 @@ public class SuperPlayActivity extends AppCompatActivity implements QuizView {
                     Toast.makeText(SuperPlayActivity.this, "Bạn chưa nhập tên", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    long kq=sqlOpenHelper.insertUser(new NguoiChoi(edtNguoiChoi.getText().toString(),Scores+""));
+                    long kq=sqlOpenHelper.insertUser(new NguoiChoi(edtNguoiChoi.getText().toString(),Scores));
                     if (kq>0){
                         Toast.makeText(SuperPlayActivity.this, "Thêm Thành Công", Toast.LENGTH_SHORT).show();
 
